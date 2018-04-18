@@ -1,7 +1,9 @@
 var beers = [];
 
+var beer;
+
 var addBeer = function (name, category, rate) {
-    var beer = {
+    let beer = {
         name: name,
         category: category,
         rate: rate
@@ -25,7 +27,7 @@ var renderBeers = function () {
 };
 
 
-var sortObject = function (obj) {
+/*var sortObject = function (obj) {
     var arr = [];
     for (var prop in obj) {
         if (obj.hasOwnProperty(prop)) {
@@ -49,7 +51,7 @@ for (var i = 0; i < arr.length; i++) {
     $("ul").append("<li>" + arr[i].name + " " + arr[i].category + " " + arr[i].rate + "</li>");
 };
 };
-
+*/
 /*var mySort = function () {
 
     beers.sort(function(a, b) { return a.value - b.value; });
@@ -77,10 +79,28 @@ for (var i = 0; i < arr.length; i++) {
     };*/
 
 
+    var acends = true;
+
+var sortBeers =function(){
+    for (let i=0; i<beers.length; i++){
+        if (acends===false) {
+    beers.sort(function(a, b){
+         return a.rate - b.rate ||  a.name.localeCompare(b.name)
+        })
+        $("ul").append('<li>'+beers[i].name+' '+beers[i].category+' rating is '+beers[i].rate+'</li>')
+    } else {
+        beers.sort(function(a, b){
+            return b.rate - a.rate ||  b.name.localeCompare(a.name)
+           })
+           $("ul").append('<li>'+beers[i].name+' '+beers[i].category+' rating is '+beers[i].rate+'</li>')
+    }
+}
+
+}
 
 $(".sort").click(function () {
     $("ul").find("li").remove();
-    mySort();
+    sortBeers();
 });
 
 
